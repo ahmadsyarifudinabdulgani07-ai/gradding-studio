@@ -1,0 +1,2442 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Admin Gradding Studio
+    </title>
+
+    <style>
+
+        /* =========================================
+           RESET
+        ========================================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background: #f4f7fb;
+
+            color: #111827;
+        }
+
+        button,
+        input,
+        select {
+            font: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+
+        /* =========================================
+           LOGIN PAGE
+        ========================================= */
+
+        .login-page {
+
+            position: fixed;
+
+            inset: 0;
+
+            z-index: 9999;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 25px;
+
+            background:
+                radial-gradient(
+                    circle at 15% 20%,
+                    rgba(245, 158, 11, .17),
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 85% 80%,
+                    rgba(59, 130, 246, .10),
+                    transparent 30%
+                ),
+                #0f172a;
+        }
+
+
+        .login-container {
+
+            width: 100%;
+
+            max-width: 1050px;
+
+            min-height: 620px;
+
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            background: #ffffff;
+
+            border-radius: 28px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 35px 100px
+                rgba(0, 0, 0, .35);
+        }
+
+
+        /* =========================================
+           LOGIN LEFT
+        ========================================= */
+
+        .login-left {
+
+            position: relative;
+
+            display: flex;
+
+            flex-direction: column;
+
+            padding: 45px;
+
+            overflow: hidden;
+
+            color: white;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #111827,
+                    #0f172a
+                );
+        }
+
+
+        .login-left::before {
+
+            content: "";
+
+            position: absolute;
+
+            width: 350px;
+
+            height: 350px;
+
+            border-radius: 50%;
+
+            right: -170px;
+
+            top: -150px;
+
+            background:
+                rgba(245, 158, 11, .15);
+        }
+
+
+        .login-left::after {
+
+            content: "";
+
+            position: absolute;
+
+            width: 260px;
+
+            height: 260px;
+
+            border-radius: 50%;
+
+            left: -150px;
+
+            bottom: -150px;
+
+            background:
+                rgba(245, 158, 11, .08);
+        }
+
+
+        .login-brand {
+
+            position: relative;
+
+            z-index: 2;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 14px;
+        }
+
+
+        .login-brand-logo {
+
+            width: 55px;
+
+            height: 55px;
+
+            border-radius: 16px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            color: #111827;
+
+            font-size: 19px;
+
+            font-weight: 900;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #f59e0b,
+                    #fbbf24
+                );
+
+            box-shadow:
+                0 12px 30px
+                rgba(245, 158, 11, .25);
+        }
+
+
+        .login-brand h2 {
+
+            font-size: 22px;
+
+            margin-bottom: 2px;
+        }
+
+
+        .login-brand h2 span {
+
+            color: #f59e0b;
+        }
+
+
+        .login-brand p {
+
+            font-size: 12px;
+
+            color: #94a3b8;
+        }
+
+
+        .login-welcome {
+
+            position: relative;
+
+            z-index: 2;
+
+            margin: auto 0;
+        }
+
+
+        .admin-badge {
+
+            display: inline-block;
+
+            margin-bottom: 22px;
+
+            padding: 8px 14px;
+
+            border-radius: 50px;
+
+            border:
+                1px solid
+                rgba(245, 158, 11, .30);
+
+            background:
+                rgba(245, 158, 11, .10);
+
+            color: #fbbf24;
+
+            font-size: 11px;
+
+            font-weight: 900;
+
+            letter-spacing: .7px;
+        }
+
+
+        .login-welcome h1 {
+
+            max-width: 430px;
+
+            margin-bottom: 18px;
+
+            font-size: 42px;
+
+            line-height: 1.1;
+        }
+
+
+        .login-welcome > p {
+
+            max-width: 430px;
+
+            color: #cbd5e1;
+
+            font-size: 14px;
+
+            line-height: 1.8;
+        }
+
+
+        .login-features {
+
+            display: grid;
+
+            gap: 14px;
+
+            margin-top: 30px;
+        }
+
+
+        .login-feature {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            color: #e2e8f0;
+
+            font-size: 13px;
+        }
+
+
+        .feature-check {
+
+            width: 27px;
+
+            height: 27px;
+
+            flex-shrink: 0;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 8px;
+
+            color: #fbbf24;
+
+            font-weight: bold;
+
+            background:
+                rgba(245, 158, 11, .13);
+        }
+
+
+        .login-copyright {
+
+            position: relative;
+
+            z-index: 2;
+
+            color: #64748b;
+
+            font-size: 11px;
+        }
+
+
+        /* =========================================
+           LOGIN RIGHT
+        ========================================= */
+
+        .login-right {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 50px;
+        }
+
+
+        .login-form-container {
+
+            width: 100%;
+
+            max-width: 390px;
+        }
+
+
+        .login-lock {
+
+            width: 52px;
+
+            height: 52px;
+
+            margin-bottom: 20px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 15px;
+
+            background: #fff7ed;
+
+            font-size: 22px;
+        }
+
+
+        .login-form-container h2 {
+
+            margin-bottom: 7px;
+
+            font-size: 30px;
+
+            color: #0f172a;
+        }
+
+
+        .login-subtitle {
+
+            margin-bottom: 30px;
+
+            color: #64748b;
+
+            font-size: 14px;
+
+            line-height: 1.6;
+        }
+
+
+        /* =========================================
+           LOGIN INPUT
+        ========================================= */
+
+        .login-field {
+
+            margin-bottom: 18px;
+        }
+
+
+        .login-field label {
+
+            display: block;
+
+            margin-bottom: 8px;
+
+            color: #334155;
+
+            font-size: 13px;
+
+            font-weight: 700;
+        }
+
+
+        .login-input {
+
+            position: relative;
+        }
+
+
+        .login-input-icon {
+
+            position: absolute;
+
+            left: 15px;
+
+            top: 50%;
+
+            transform:
+                translateY(-50%);
+
+            z-index: 2;
+
+            font-size: 16px;
+
+            opacity: .6;
+        }
+
+
+        .login-input input {
+
+            width: 100%;
+
+            height: 52px;
+
+            padding:
+                0 46px;
+
+            border:
+                1px solid #dbe2ea;
+
+            border-radius: 13px;
+
+            outline: none;
+
+            color: #111827;
+
+            background: #f8fafc;
+
+            font-size: 14px;
+
+            transition: .2s;
+        }
+
+
+        .login-input input:focus {
+
+            border-color: #f59e0b;
+
+            background: white;
+
+            box-shadow:
+                0 0 0 4px
+                rgba(245, 158, 11, .12);
+        }
+
+
+        .password-eye {
+
+            position: absolute;
+
+            right: 13px;
+
+            top: 50%;
+
+            transform:
+                translateY(-50%);
+
+            border: none;
+
+            background: transparent;
+
+            font-size: 16px;
+        }
+
+
+        /* =========================================
+           LOGIN BUTTON
+        ========================================= */
+
+        .login-button {
+
+            width: 100%;
+
+            height: 52px;
+
+            margin-top: 5px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 10px;
+
+            border: none;
+
+            border-radius: 13px;
+
+            color: #111827;
+
+            font-weight: 900;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #f59e0b,
+                    #fbbf24
+                );
+
+            box-shadow:
+                0 10px 25px
+                rgba(245, 158, 11, .22);
+
+            transition: .2s;
+        }
+
+
+        .login-button:hover {
+
+            transform:
+                translateY(-2px);
+
+            box-shadow:
+                0 15px 30px
+                rgba(245, 158, 11, .30);
+        }
+
+
+        .login-message {
+
+            margin-top: 14px;
+
+            text-align: center;
+
+            font-size: 13px;
+
+            font-weight: bold;
+        }
+
+
+        .login-message.success,
+        .msg.success {
+
+            color: #16a34a;
+        }
+
+
+        .login-message.error,
+        .msg.error {
+
+            color: #dc2626;
+        }
+
+
+        .login-security {
+
+            display: flex;
+
+            gap: 9px;
+
+            align-items: center;
+
+            margin-top: 22px;
+
+            padding: 12px;
+
+            border:
+                1px solid #e5e7eb;
+
+            border-radius: 11px;
+
+            background: #f8fafc;
+
+            color: #64748b;
+
+            font-size: 11px;
+        }
+
+
+        .login-back {
+
+            display: block;
+
+            margin-top: 22px;
+
+            text-align: center;
+
+            color: #64748b;
+
+            font-size: 12px;
+
+            font-weight: bold;
+        }
+
+
+        .login-back:hover {
+
+            color: #f59e0b;
+        }
+
+
+        #loginSection.hidden {
+
+            display: none !important;
+        }
+
+
+        /* =========================================
+           ADMIN LAYOUT
+        ========================================= */
+
+        .admin-layout {
+
+            display: grid;
+
+            grid-template-columns:
+                250px 1fr;
+
+            min-height: 100vh;
+        }
+
+
+        .sidebar {
+
+            position: sticky;
+
+            top: 0;
+
+            height: 100vh;
+
+            padding: 25px 17px;
+
+            color: white;
+
+            background: #0f172a;
+        }
+
+
+        .sidebar-brand {
+
+            margin-bottom: 30px;
+
+            padding: 0 10px;
+
+            font-size: 21px;
+
+            font-weight: 900;
+        }
+
+
+        .sidebar-brand span {
+
+            color: #f59e0b;
+        }
+
+
+        .sidebar-small {
+
+            display: block;
+
+            margin-top: 4px;
+
+            color: #64748b;
+
+            font-size: 11px;
+
+            font-weight: normal;
+        }
+
+
+        .sidebar-nav {
+
+            display: grid;
+
+            gap: 5px;
+        }
+
+
+        .sidebar-nav button,
+        .sidebar-nav a {
+
+            width: 100%;
+
+            padding: 13px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            text-align: left;
+
+            color: #cbd5e1;
+
+            background: transparent;
+
+            font-size: 14px;
+
+            font-weight: bold;
+        }
+
+
+        .sidebar-nav button:hover,
+        .sidebar-nav a:hover {
+
+            color: white;
+
+            background: #1e293b;
+        }
+
+
+        .sidebar-account {
+
+            margin-top: 30px;
+
+            padding-top: 20px;
+
+            border-top:
+                1px solid #334155;
+        }
+
+
+        #adminEmail {
+
+            margin-bottom: 12px;
+
+            color: #cbd5e1;
+
+            font-size: 12px;
+
+            word-break: break-word;
+        }
+
+
+        /* =========================================
+           MAIN DASHBOARD
+        ========================================= */
+
+        .admin-main {
+
+            min-width: 0;
+        }
+
+
+        .topbar {
+
+            position: sticky;
+
+            top: 0;
+
+            z-index: 20;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding: 18px 25px;
+
+            border-bottom:
+                1px solid #e5e7eb;
+
+            background: white;
+        }
+
+
+        .topbar h3 {
+
+            margin-bottom: 3px;
+        }
+
+
+        .topbar p {
+
+            color: #64748b;
+
+            font-size: 12px;
+        }
+
+
+        .dashboard-content {
+
+            padding: 25px;
+        }
+
+
+        #dashboard {
+
+            display: none;
+        }
+
+
+        #dashboard.active {
+
+            display: block;
+        }
+
+
+        /* =========================================
+           BUTTON
+        ========================================= */
+
+        .btn {
+
+            border: none;
+
+            border-radius: 10px;
+
+            padding: 10px 14px;
+
+            font-weight: bold;
+        }
+
+
+        .btn-primary {
+
+            background: #f59e0b;
+
+            color: #111827;
+        }
+
+
+        .btn-danger {
+
+            background: #dc2626;
+
+            color: white;
+        }
+
+
+        .btn-dark {
+
+            background: #1e293b;
+
+            color: white;
+        }
+
+
+        .btn-light {
+
+            background: #eef2f7;
+
+            color: #334155;
+        }
+
+
+        /* =========================================
+           STATISTICS
+        ========================================= */
+
+        .stats {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 16px;
+
+            margin-bottom: 20px;
+        }
+
+
+        .stat-card {
+
+            padding: 20px;
+
+            border:
+                1px solid #e5e7eb;
+
+            border-radius: 16px;
+
+            background: white;
+        }
+
+
+        .stat-card small {
+
+            color: #64748b;
+
+            font-weight: bold;
+        }
+
+
+        .stat-card strong {
+
+            display: block;
+
+            margin-top: 7px;
+
+            font-size: 31px;
+        }
+
+
+        /* =========================================
+           PANELS
+        ========================================= */
+
+        .dashboard-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 18px;
+
+            margin-bottom: 20px;
+        }
+
+
+        .panel {
+
+            padding: 22px;
+
+            border:
+                1px solid #e5e7eb;
+
+            border-radius: 17px;
+
+            background: white;
+        }
+
+
+        .panel h2 {
+
+            margin-bottom: 8px;
+        }
+
+
+        .muted {
+
+            color: #64748b;
+
+            font-size: 13px;
+
+            line-height: 1.6;
+        }
+
+
+        /* =========================================
+           UPLOAD
+        ========================================= */
+
+        #portfolioFile {
+
+            width: 100%;
+
+            margin-top: 18px;
+
+            padding: 12px;
+
+            border:
+                1px solid #cbd5e1;
+
+            border-radius: 10px;
+
+            background: #f8fafc;
+        }
+
+
+        .preview {
+
+            display: none;
+
+            width: 100%;
+
+            max-height: 270px;
+
+            margin-top: 15px;
+
+            object-fit: cover;
+
+            border-radius: 13px;
+        }
+
+
+        .upload-actions {
+
+            display: flex;
+
+            gap: 8px;
+
+            margin-top: 14px;
+        }
+
+
+        .msg {
+
+            margin-top: 12px;
+
+            font-size: 13px;
+
+            font-weight: bold;
+        }
+
+
+        /* =========================================
+           PORTFOLIO
+        ========================================= */
+
+        .panel-header {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 10px;
+
+            margin-bottom: 15px;
+        }
+
+
+        .portfolio {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 10px;
+        }
+
+
+        .photo {
+
+            position: relative;
+
+            height: 160px;
+
+            overflow: hidden;
+
+            border-radius: 12px;
+
+            background: #e5e7eb;
+        }
+
+
+        .photo img {
+
+            width: 100%;
+
+            height: 100%;
+
+            object-fit: cover;
+        }
+
+
+        .photo button {
+
+            position: absolute;
+
+            top: 7px;
+
+            right: 7px;
+        }
+
+
+        /* =========================================
+           BOOKING
+        ========================================= */
+
+        .booking-toolbar {
+
+            display: grid;
+
+            grid-template-columns:
+                1fr 190px 150px;
+
+            gap: 10px;
+
+            margin: 18px 0;
+        }
+
+
+        .booking-toolbar input,
+        .booking-toolbar select,
+        .actions select {
+
+            width: 100%;
+
+            padding: 11px;
+
+            border:
+                1px solid #cbd5e1;
+
+            border-radius: 10px;
+
+            outline: none;
+
+            background: white;
+        }
+
+
+        .booking {
+
+            margin: 10px 0;
+
+            padding: 16px;
+
+            border:
+                1px solid #e5e7eb;
+
+            border-radius: 13px;
+
+            background: #ffffff;
+        }
+
+
+        .booking-top {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 10px;
+        }
+
+
+        .status {
+
+            padding: 5px 10px;
+
+            border-radius: 50px;
+
+            color: #92400e;
+
+            background: #fef3c7;
+
+            font-size: 11px;
+
+            font-weight: 900;
+        }
+
+
+        .meta {
+
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 7px 15px;
+
+            margin-top: 12px;
+
+            color: #475569;
+
+            font-size: 13px;
+        }
+
+
+        .actions {
+
+            display: flex;
+
+            gap: 8px;
+
+            flex-wrap: wrap;
+
+            margin-top: 13px;
+        }
+
+
+        .actions select {
+
+            max-width: 180px;
+        }
+
+
+        .empty {
+
+            grid-column:
+                1 / -1;
+
+            padding: 22px;
+
+            border:
+                1px dashed #cbd5e1;
+
+            border-radius: 11px;
+
+            text-align: center;
+
+            color: #64748b;
+        }
+
+
+        /* =========================================
+           MODAL
+        ========================================= */
+
+        .modal {
+
+            position: fixed;
+
+            inset: 0;
+
+            z-index: 999;
+
+            display: none;
+
+            place-items: center;
+
+            padding: 20px;
+
+            background:
+                rgba(15, 23, 42, .65);
+        }
+
+
+        .modal.active {
+
+            display: grid;
+        }
+
+
+        .modal-card {
+
+            width:
+                min(560px, 100%);
+
+            padding: 22px;
+
+            border-radius: 18px;
+
+            background: white;
+        }
+
+
+        .modal-header {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            margin-bottom: 15px;
+        }
+
+
+        .detail {
+
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 10px;
+        }
+
+
+        .detail div {
+
+            padding: 11px;
+
+            border:
+                1px solid #e5e7eb;
+
+            border-radius: 10px;
+
+            background: #f8fafc;
+        }
+
+
+        /* =========================================
+           RESPONSIVE
+        ========================================= */
+
+        @media(max-width: 900px) {
+
+            .login-container {
+
+                grid-template-columns:
+                    1fr;
+
+                max-width: 520px;
+            }
+
+
+            .login-left {
+
+                display: none;
+            }
+
+
+            .login-right {
+
+                min-height: 600px;
+            }
+
+
+            .admin-layout {
+
+                grid-template-columns:
+                    1fr;
+            }
+
+
+            .sidebar {
+
+                position: static;
+
+                height: auto;
+            }
+
+
+            .stats {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+
+            .dashboard-grid {
+
+                grid-template-columns:
+                    1fr;
+            }
+
+        }
+
+
+        @media(max-width: 600px) {
+
+            .login-page {
+
+                padding: 15px;
+            }
+
+
+            .login-container {
+
+                min-height: auto;
+
+                border-radius: 20px;
+            }
+
+
+            .login-right {
+
+                min-height: auto;
+
+                padding: 40px 25px;
+            }
+
+
+            .login-form-container h2 {
+
+                font-size: 27px;
+            }
+
+
+            .stats {
+
+                grid-template-columns:
+                    1fr 1fr;
+            }
+
+
+            .portfolio {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+
+            .booking-toolbar {
+
+                grid-template-columns:
+                    1fr;
+            }
+
+
+            .meta,
+            .detail {
+
+                grid-template-columns:
+                    1fr;
+            }
+
+
+            .topbar {
+
+                padding: 15px;
+            }
+
+
+            .dashboard-content {
+
+                padding: 15px;
+            }
+
+        }
+
+    
+        /* =========================================
+           PORTFOLIO CATEGORY + HERO WEBSITE
+        ========================================= */
+
+        .portfolio-category-field,
+        .hero-upload-field {
+            margin-top: 18px;
+        }
+
+        .portfolio-category-field label,
+        .hero-upload-field label {
+            display: block;
+            margin-bottom: 8px;
+            color: #334155;
+            font-size: 13px;
+            font-weight: 800;
+        }
+
+        #portfolioCategory,
+        #heroFile {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            background: #f8fafc;
+            outline: none;
+        }
+
+        #portfolioCategory:focus,
+        #heroFile:focus {
+            border-color: #f59e0b;
+            box-shadow: 0 0 0 3px rgba(245,158,11,.12);
+            background: #fff;
+        }
+
+        .photo-category {
+            position: absolute;
+            left: 9px;
+            bottom: 9px;
+            z-index: 2;
+            padding: 5px 9px;
+            border-radius: 999px;
+            background: rgba(15,23,42,.78);
+            color: #fff;
+            font-size: 10px;
+            font-weight: 800;
+            text-transform: capitalize;
+            backdrop-filter: blur(6px);
+        }
+
+        .hero-manager {
+            margin-bottom: 20px;
+        }
+
+        .hero-manager-grid {
+            display: grid;
+            grid-template-columns: .9fr 1.1fr;
+            gap: 22px;
+            align-items: center;
+        }
+
+        .hero-current {
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            border-radius: 16px;
+            overflow: hidden;
+            background: #e5e7eb;
+            border: 1px solid #e5e7eb;
+        }
+
+        .hero-current img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .hero-note {
+            margin-top: 10px;
+            color: #64748b;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        @media(max-width: 800px) {
+            .hero-manager-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     LOGIN
+===================================================== -->
+
+<section
+    id="loginSection"
+    class="login-page"
+>
+
+    <div class="login-container">
+
+
+        <!-- LEFT -->
+
+        <div class="login-left">
+
+            <div class="login-brand">
+
+                <div class="login-brand-logo">
+                    GS
+                </div>
+
+                <div>
+
+                    <h2>
+                        Gradding<span>Studio</span>
+                    </h2>
+
+                    <p>
+                        Photography & Creative Studio
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="login-welcome">
+
+                <div class="admin-badge">
+                    ADMIN MANAGEMENT SYSTEM
+                </div>
+
+                <h1>
+                    Kelola studio dalam satu dashboard.
+                </h1>
+
+                <p>
+                    Kelola booking pelanggan,
+                    portfolio fotografi dan informasi
+                    layanan Gradding Studio dengan
+                    lebih mudah.
+                </p>
+
+
+                <div class="login-features">
+
+                    <div class="login-feature">
+
+                        <div class="feature-check">
+                            ✓
+                        </div>
+
+                        Kelola booking pelanggan
+
+                    </div>
+
+
+                    <div class="login-feature">
+
+                        <div class="feature-check">
+                            ✓
+                        </div>
+
+                        Upload dan kelola portfolio
+
+                    </div>
+
+
+                    <div class="login-feature">
+
+                        <div class="feature-check">
+                            ✓
+                        </div>
+
+                        Login aman menggunakan Supabase
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="login-copyright">
+                © 2026 Gradding Studio
+            </div>
+
+        </div>
+
+
+        <!-- RIGHT -->
+
+        <div class="login-right">
+
+            <div class="login-form-container">
+
+                <div class="login-lock">
+                    🔐
+                </div>
+
+                <h2>
+                    Selamat Datang
+                </h2>
+
+                <p class="login-subtitle">
+                    Silakan masuk menggunakan akun
+                    administrator Gradding Studio.
+                </p>
+
+
+                <form id="loginForm">
+
+
+                    <!-- EMAIL -->
+
+                    <div class="login-field">
+
+                        <label for="email">
+                            Email Admin
+                        </label>
+
+                        <div class="login-input">
+
+                            <span class="login-input-icon">
+                                ✉
+                            </span>
+
+                            <input
+                                type="email"
+                                id="email"
+                                placeholder="Masukkan email admin"
+                                autocomplete="email"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- PASSWORD -->
+
+                    <div class="login-field">
+
+                        <label for="password">
+                            Password
+                        </label>
+
+                        <div class="login-input">
+
+                            <span class="login-input-icon">
+                                🔒
+                            </span>
+
+                            <input
+                                type="password"
+                                id="password"
+                                placeholder="Masukkan password"
+                                autocomplete="current-password"
+                                required
+                            >
+
+                            <button
+                                type="button"
+                                class="password-eye"
+                                id="togglePassword"
+                            >
+                                👁
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- BUTTON -->
+
+                    <button
+                        type="submit"
+                        class="login-button"
+                    >
+
+                        Masuk ke Dashboard
+
+                        <span>
+                            →
+                        </span>
+
+                    </button>
+
+
+                    <div
+                        id="loginMessage"
+                        class="login-message"
+                    ></div>
+
+                </form>
+
+
+                <div class="login-security">
+
+                    <span>🛡️</span>
+
+                    <span>
+                        Area khusus administrator.
+                        Login diamankan menggunakan
+                        Supabase Authentication.
+                    </span>
+
+                </div>
+
+
+                <a
+                    href="index.html"
+                    class="login-back"
+                >
+                    ← Kembali ke Website
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     ADMIN
+===================================================== -->
+
+<div class="admin-layout">
+
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="sidebar-brand">
+
+            Gradding<span>Studio</span>
+
+            <span class="sidebar-small">
+                Admin Panel
+            </span>
+
+        </div>
+
+
+        <nav class="sidebar-nav">
+
+            <button
+                onclick="go('overview')"
+            >
+                🏠 Dashboard
+            </button>
+
+
+            <button
+                onclick="go('portfolioSection')"
+            >
+                🖼️ Portfolio
+            </button>
+
+
+            <button
+                onclick="go('bookingSection')"
+            >
+                📅 Booking
+            </button>
+
+
+            <a href="index.html">
+                🌐 Lihat Website
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-account">
+
+            <div id="adminEmail">
+                Belum login
+            </div>
+
+            <button
+                id="logoutBtn"
+                class="btn btn-danger"
+                style="width:100%;"
+            >
+                Keluar
+            </button>
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- MAIN -->
+
+    <main class="admin-main">
+
+
+        <header class="topbar">
+
+            <div>
+
+                <h3>
+                    Dashboard Admin
+                </h3>
+
+                <p>
+                    Kelola Gradding Studio
+                </p>
+
+            </div>
+
+
+            <a
+                href="index.html"
+                class="btn btn-dark"
+            >
+                ← Website
+            </a>
+
+        </header>
+
+
+
+        <!-- DASHBOARD -->
+
+        <section id="dashboard">
+
+            <div class="dashboard-content">
+
+
+                <!-- STAT -->
+
+                <section
+                    id="overview"
+                    class="stats"
+                >
+
+                    <div class="stat-card">
+
+                        <small>
+                            Total Booking
+                        </small>
+
+                        <strong id="statTotal">
+                            0
+                        </strong>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <small>
+                            Menunggu
+                        </small>
+
+                        <strong id="statPending">
+                            0
+                        </strong>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <small>
+                            Dikonfirmasi
+                        </small>
+
+                        <strong id="statConfirmed">
+                            0
+                        </strong>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <small>
+                            Total Portfolio
+                        </small>
+
+                        <strong id="statPortfolio">
+                            0
+                        </strong>
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- FOTO UTAMA WEBSITE -->
+
+                <section class="panel hero-manager" id="heroSection">
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <h2>
+                                Foto Utama Website
+                            </h2>
+
+                            <p class="muted">
+                                Ganti foto besar pada bagian Hero di halaman utama tanpa mengedit index.html.
+                            </p>
+
+                        </div>
+
+                        <button
+                            id="refreshHeroBtn"
+                            class="btn btn-light"
+                            type="button"
+                        >
+                            Refresh
+                        </button>
+
+                    </div>
+
+                    <div class="hero-manager-grid">
+
+                        <div>
+
+                            <div class="hero-current">
+
+                                <img
+                                    id="heroCurrentImage"
+                                    alt="Foto utama Gradding Studio"
+                                >
+
+                            </div>
+
+                            <p class="hero-note">
+                                Foto disimpan di Supabase Storage pada
+                                <strong>portfolio/website/hero/hero.jpg</strong>.
+                            </p>
+
+                        </div>
+
+                        <div>
+
+                            <div class="hero-upload-field">
+
+                                <label for="heroFile">
+                                    Pilih Foto Utama Baru
+                                </label>
+
+                                <input
+                                    id="heroFile"
+                                    type="file"
+                                    accept="image/jpeg,image/png,image/webp"
+                                >
+
+                            </div>
+
+                            <img
+                                id="heroPreview"
+                                class="preview"
+                                alt="Preview foto utama"
+                            >
+
+                            <div class="upload-actions">
+
+                                <button
+                                    id="uploadHeroBtn"
+                                    class="btn btn-primary"
+                                    type="button"
+                                >
+                                    Ganti Foto Utama
+                                </button>
+
+                                <button
+                                    id="resetHeroBtn"
+                                    class="btn btn-light"
+                                    type="button"
+                                >
+                                    Reset
+                                </button>
+
+                            </div>
+
+                            <div
+                                id="heroMessage"
+                                class="msg"
+                            ></div>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- PORTFOLIO -->
+
+                <section
+                    id="portfolioSection"
+                    class="dashboard-grid"
+                >
+
+
+                    <!-- UPLOAD -->
+
+                    <div class="panel">
+
+                        <h2>
+                            Upload Portfolio
+                        </h2>
+
+                        <p class="muted">
+                            Upload foto JPG, PNG atau WEBP.
+                            Maksimal 10 MB per foto.
+                        </p>
+
+
+                        <div class="portfolio-category-field">
+
+                            <label for="portfolioCategory">
+                                Kategori Portfolio
+                            </label>
+
+                            <select id="portfolioCategory">
+
+                                <option value="wisuda">
+                                    🎓 Foto Wisuda
+                                </option>
+
+                                <option value="kelulusan">
+                                    📸 Foto Kelulusan
+                                </option>
+
+                                <option value="grup">
+                                    👥 Foto Grup
+                                </option>
+
+                                <option value="lainnya">
+                                    🖼️ Lainnya
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <input
+                            id="portfolioFile"
+                            type="file"
+                            accept="image/jpeg,image/png,image/webp"
+                            multiple
+                        >
+
+
+                        <img
+                            id="preview"
+                            class="preview"
+                            alt="Preview"
+                        >
+
+
+                        <div class="upload-actions">
+
+                            <button
+                                id="uploadBtn"
+                                class="btn btn-primary"
+                            >
+                                Upload Foto
+                            </button>
+
+
+                            <button
+                                id="resetFileBtn"
+                                class="btn btn-light"
+                            >
+                                Reset
+                            </button>
+
+                        </div>
+
+
+                        <div
+                            id="uploadMessage"
+                            class="msg"
+                        ></div>
+
+                    </div>
+
+
+
+                    <!-- MANAGE PORTFOLIO -->
+
+                    <div class="panel">
+
+                        <div class="panel-header">
+
+                            <div>
+
+                                <h2>
+                                    Kelola Portfolio
+                                </h2>
+
+                                <p class="muted">
+                                    Foto tersimpan di
+                                    Supabase Storage.
+                                </p>
+
+                            </div>
+
+
+                            <button
+                                id="refreshPortfolioBtn"
+                                class="btn btn-light"
+                            >
+                                Refresh
+                            </button>
+
+                        </div>
+
+
+                        <div
+                            id="portfolioGrid"
+                            class="portfolio"
+                        >
+
+                            <div class="empty">
+                                Memuat portfolio...
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- BOOKING -->
+
+                <section
+                    id="bookingSection"
+                    class="panel"
+                >
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <h2>
+                                Data Booking
+                            </h2>
+
+                            <p class="muted">
+                                Kelola booking pelanggan
+                                Gradding Studio.
+                            </p>
+
+                        </div>
+
+
+                        <button
+                            id="clearBookingsBtn"
+                            class="btn btn-danger"
+                        >
+                            Hapus Semua
+                        </button>
+
+                    </div>
+
+
+                    <!-- TOOLBAR -->
+
+                    <div class="booking-toolbar">
+
+                        <input
+                            id="searchBooking"
+                            type="search"
+                            placeholder="Cari nama, WA, kode booking..."
+                        >
+
+
+                        <select id="filterStatus">
+
+                            <option value="">
+                                Semua Status
+                            </option>
+
+                            <option value="Menunggu">
+                                Menunggu
+                            </option>
+
+                            <option value="Dikonfirmasi">
+                                Dikonfirmasi
+                            </option>
+
+                            <option value="Selesai">
+                                Selesai
+                            </option>
+
+                            <option value="Dibatalkan">
+                                Dibatalkan
+                            </option>
+
+                        </select>
+
+
+                        <select id="sortBooking">
+
+                            <option value="newest">
+                                Terbaru
+                            </option>
+
+                            <option value="oldest">
+                                Terlama
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div id="bookingList">
+
+                        <div class="empty">
+                            Memuat data booking...
+                        </div>
+
+                    </div>
+
+                </section>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+
+<!-- =====================================================
+     MODAL BOOKING
+===================================================== -->
+
+<div
+    id="bookingModal"
+    class="modal"
+>
+
+    <div class="modal-card">
+
+        <div class="modal-header">
+
+            <h2>
+                Detail Booking
+            </h2>
+
+
+            <button
+                id="closeModalBtn"
+                class="btn btn-light"
+            >
+                ✕
+            </button>
+
+        </div>
+
+
+        <div id="bookingDetail"></div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     SUPABASE
+===================================================== -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+<!-- ADMIN JS -->
+
+<script src="admin.js"></script>
+
+
+<!-- =====================================================
+     SHOW / HIDE PASSWORD
+===================================================== -->
+
+<script>
+
+    const togglePassword =
+        document.getElementById(
+            "togglePassword"
+        );
+
+
+    if (togglePassword) {
+
+        togglePassword.addEventListener(
+            "click",
+            function () {
+
+                const password =
+                    document.getElementById(
+                        "password"
+                    );
+
+
+                if (
+                    password.type ===
+                    "password"
+                ) {
+
+                    password.type =
+                        "text";
+
+                    togglePassword.textContent =
+                        "🙈";
+
+                }
+
+                else {
+
+                    password.type =
+                        "password";
+
+                    togglePassword.textContent =
+                        "👁";
+
+                }
+
+            }
+        );
+
+    }
+
+</script>
+
+
+</body>
+
+</html>

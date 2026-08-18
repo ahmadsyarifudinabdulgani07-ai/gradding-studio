@@ -1,0 +1,1346 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Gradding Studio — Foto Wisuda & Video</title>
+
+<style>
+
+:root{
+    --p:#111827;
+    --a:#f59e0b;
+    --m:#64748b;
+    --b:#e5e7eb;
+    --g:#16a34a;
+    --r:#dc2626;
+}
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    color:var(--p);
+    line-height:1.6;
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+.container{
+    width:min(1120px,92%);
+    margin:auto;
+}
+
+
+/* =========================================
+   NAVBAR
+========================================= */
+
+nav{
+    position:fixed;
+    top:0;
+    width:100%;
+    z-index:20;
+
+    background:#fffffff2;
+
+    border-bottom:1px solid #eee;
+}
+
+.nav{
+    height:72px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.logo{
+    font-weight:900;
+    font-size:1.35rem;
+}
+
+.logo span{
+    color:var(--a);
+}
+
+.links{
+    display:flex;
+    gap:22px;
+
+    font-weight:700;
+}
+
+.menu{
+    display:none;
+
+    font-size:1.5rem;
+
+    cursor:pointer;
+}
+
+
+/* =========================================
+   HERO
+========================================= */
+
+.hero{
+    padding:145px 0 90px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #111827,
+            #1f2937
+        );
+
+    color:#fff;
+}
+
+.hero-grid{
+    display:grid;
+
+    grid-template-columns:
+        1.2fr .8fr;
+
+    gap:45px;
+
+    align-items:center;
+}
+
+h1{
+    font-size:
+        clamp(
+            2.5rem,
+            6vw,
+            5rem
+        );
+
+    line-height:1.02;
+
+    margin:15px 0;
+}
+
+.hero p{
+    color:#d1d5db;
+
+    margin-bottom:25px;
+}
+
+
+/* =========================================
+   HERO CARD
+========================================= */
+
+.hero-card{
+    background:#fff;
+
+    color:#111827;
+
+    border-radius:24px;
+
+    padding:16px;
+
+    box-shadow:
+        0 20px 50px
+        rgba(0,0,0,.25);
+}
+
+
+/* FOTO HERO */
+
+.hero-photo{
+    width:100%;
+
+    height:360px;
+
+    border-radius:18px;
+
+    overflow:hidden;
+
+    background:#e5e7eb;
+}
+
+.hero-photo img{
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+    display:block;
+
+    transition:.4s;
+}
+
+.hero-photo:hover img{
+    transform:scale(1.04);
+}
+
+.hero-card b{
+    display:block;
+
+    margin-top:10px;
+}
+
+
+/* =========================================
+   BUTTON
+========================================= */
+
+.btn{
+    display:inline-flex;
+
+    padding:12px 19px;
+
+    border:0;
+
+    border-radius:11px;
+
+    font-weight:800;
+
+    cursor:pointer;
+}
+
+.primary{
+    background:var(--a);
+
+    color:#111827;
+}
+
+.outline{
+    border:1px solid #64748b;
+
+    color:#fff;
+
+    margin-left:8px;
+}
+
+
+/* =========================================
+   SECTION
+========================================= */
+
+section{
+    padding:85px 0;
+}
+
+.head{
+    text-align:center;
+
+    margin-bottom:40px;
+}
+
+.head h2{
+    font-size:2.2rem;
+}
+
+.head p{
+    color:var(--m);
+}
+
+
+/* =========================================
+   SERVICES
+========================================= */
+
+.services,
+.booking{
+    background:#f8fafc;
+}
+
+.cards{
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap:18px;
+}
+
+.card,
+.package{
+    border:1px solid var(--b);
+
+    padding:25px;
+
+    border-radius:17px;
+
+    background:#fff;
+}
+
+.card p,
+.package p{
+    color:var(--m);
+}
+
+
+/* =========================================
+   PACKAGE
+========================================= */
+
+.packages{
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:20px;
+}
+
+.amount{
+    font-size:2rem;
+
+    font-weight:900;
+
+    margin:10px 0;
+}
+
+.package ul{
+    list-style:none;
+
+    margin:16px 0;
+}
+
+.package li:before{
+    content:"✓ ";
+
+    color:var(--g);
+
+    font-weight:900;
+}
+
+
+/* =========================================
+   GALLERY
+========================================= */
+
+.gallery{
+    background:#111827;
+
+    color:#fff;
+}
+
+.gallery .head p{
+    color:#9ca3af;
+}
+
+.gallery-grid{
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap:12px;
+}
+
+.gallery-item{
+    width:100%;
+
+    aspect-ratio:4 / 3;
+
+    border-radius:14px;
+
+    overflow:hidden;
+
+    background:#1f2937;
+}
+
+.gallery-item img{
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+    display:block;
+
+    transition:.35s;
+}
+
+.gallery-item:hover img{
+    transform:scale(1.05);
+}
+
+.empty{
+    grid-column:1/-1;
+
+    text-align:center;
+
+    padding:30px;
+
+    border:
+        1px dashed #475569;
+
+    border-radius:12px;
+}
+
+
+/* =========================================
+   BOOKING
+========================================= */
+
+.booking-box{
+    display:grid;
+
+    grid-template-columns:
+        .8fr 1.2fr;
+
+    gap:30px;
+
+    background:#fff;
+
+    border:1px solid var(--b);
+
+    padding:30px;
+
+    border-radius:22px;
+}
+
+.info p{
+    color:var(--m);
+}
+
+
+/* =========================================
+   FORM
+========================================= */
+
+form{
+    display:grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:14px;
+}
+
+.field{
+    display:flex;
+
+    flex-direction:column;
+
+    gap:6px;
+}
+
+.full{
+    grid-column:1/-1;
+}
+
+label{
+    font-weight:800;
+}
+
+input,
+select,
+textarea{
+    padding:12px;
+
+    border:
+        1px solid #cbd5e1;
+
+    border-radius:10px;
+
+    font:inherit;
+}
+
+textarea{
+    min-height:90px;
+}
+
+.msg{
+    grid-column:1/-1;
+
+    font-weight:800;
+}
+
+.success{
+    color:var(--g);
+}
+
+.error{
+    color:var(--r);
+}
+
+
+/* =========================================
+   FOOTER
+========================================= */
+
+footer{
+    background:#0b1120;
+
+    color:#94a3b8;
+
+    padding:30px;
+
+    text-align:center;
+}
+
+footer strong{
+    color:#fff;
+}
+
+
+/* =========================================
+   RESPONSIVE TABLET
+========================================= */
+
+@media(max-width:850px){
+
+    .hero-grid,
+    .booking-box{
+        grid-template-columns:1fr;
+    }
+
+    .cards{
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+    .packages{
+        grid-template-columns:1fr;
+    }
+
+    .gallery-grid{
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+    .links{
+        display:none;
+
+        position:absolute;
+
+        top:72px;
+
+        left:0;
+
+        width:100%;
+
+        background:#fff;
+
+        padding:20px;
+
+        flex-direction:column;
+    }
+
+    .links.open{
+        display:flex;
+    }
+
+    .menu{
+        display:block;
+    }
+
+    .hero-photo{
+        height:420px;
+    }
+}
+
+
+/* =========================================
+   RESPONSIVE HP
+========================================= */
+
+@media(max-width:550px){
+
+    .cards,
+    .gallery-grid{
+        grid-template-columns:1fr;
+    }
+
+    form{
+        grid-template-columns:1fr;
+    }
+
+    .full,
+    .msg{
+        grid-column:auto;
+    }
+
+    .hero-photo{
+        height:330px;
+    }
+
+    .outline{
+        margin-left:0;
+
+        margin-top:10px;
+    }
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================
+     NAVBAR
+========================================= -->
+
+<nav>
+
+    <div class="container nav">
+
+        <a
+            href="#home"
+            class="logo"
+        >
+            Gradding<span>Studio</span>
+        </a>
+
+
+        <div
+            class="menu"
+            onclick="toggleMenu()"
+        >
+            ☰
+        </div>
+
+
+        <div
+            class="links"
+            id="navLinks"
+        >
+
+            <a href="#layanan">
+                Layanan
+            </a>
+
+            <a href="#paket">
+                Paket
+            </a>
+
+            <a href="#galeri">
+                Galeri
+            </a>
+
+            <a href="#booking">
+                Booking
+            </a>
+
+            <a href="admin.html">
+                Admin
+            </a>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+
+<!-- =========================================
+     HERO
+========================================= -->
+
+<header
+    class="hero"
+    id="home"
+>
+
+    <div class="container hero-grid">
+
+
+        <!-- TEXT HERO -->
+
+        <div>
+
+            <b>
+                📸 BOOKING FOTO & VIDEO ONLINE
+            </b>
+
+
+            <h1>
+                Abadikan momen kelulusanmu
+                dengan cerita yang berkesan.
+            </h1>
+
+
+            <p>
+                Jasa foto wisuda,
+                foto kelulusan,
+                dokumentasi acara,
+                dan pembuatan video.
+            </p>
+
+
+            <a
+                class="btn primary"
+                href="#booking"
+            >
+                Booking Sekarang →
+            </a>
+
+
+            <a
+                class="btn outline"
+                href="#paket"
+            >
+                Lihat Paket
+            </a>
+
+        </div>
+
+
+
+        <!-- FOTO HERO -->
+
+        <div class="hero-card">
+
+            <div class="hero-photo">
+
+                <!-- =====================================
+                     GANTI FOTO DI SINI
+                ====================================== -->
+
+                <img
+                    src="CND08213.JPG"
+                    alt="Foto Gradding Studio"
+                >
+
+            </div>
+
+
+            <b>
+                Wisuda • Graduation • Video
+            </b>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+
+<!-- =========================================
+     SERVICES
+========================================= -->
+
+<section
+    class="services"
+    id="layanan"
+>
+
+    <div class="container">
+
+
+        <div class="head">
+
+            <h2>
+                Layanan Kami
+            </h2>
+
+            <p>
+                Pilih layanan yang paling sesuai.
+            </p>
+
+        </div>
+
+
+        <div class="cards">
+
+
+            <div class="card">
+
+                <h3>
+                    🎓 Foto Wisuda
+                </h3>
+
+                <p>
+                    Formal, candid,
+                    dan keluarga.
+                </p>
+
+                <b>
+                    Mulai 150K
+                </b>
+
+            </div>
+
+
+
+            <div class="card">
+
+                <h3>
+                    📸 Foto Kelulusan
+                </h3>
+
+                <p>
+                    Sekolah, kampus,
+                    organisasi, personal.
+                </p>
+
+                <b>
+                    Mulai 100K
+                </b>
+
+            </div>
+
+
+
+            <div class="card">
+
+                <h3>
+                    🎬 Video
+                </h3>
+
+                <p>
+                    Cinematic, reels,
+                    aftermovie,
+                    dokumentasi.
+                </p>
+
+                <b>
+                    Mulai 250K
+                </b>
+
+            </div>
+
+
+
+            <div class="card">
+
+                <h3>
+                    👥 Foto Grup
+                </h3>
+
+                <p>
+                    Teman, keluarga,
+                    kelas, organisasi.
+                </p>
+
+                <b>
+                    Mulai 200K
+                </b>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================
+     PACKAGE
+========================================= -->
+
+<section id="paket">
+
+    <div class="container">
+
+
+        <div class="head">
+
+            <h2>
+                Paket Favorit
+            </h2>
+
+        </div>
+
+
+        <div class="packages">
+
+
+            <!-- BASIC -->
+
+            <div class="package">
+
+                <h3>
+                    Basic
+                </h3>
+
+
+                <div class="amount">
+                    Rp150K
+                </div>
+
+
+                <p>
+                    Untuk foto personal.
+                </p>
+
+
+                <ul>
+
+                    <li>
+                        30 foto digital
+                    </li>
+
+                    <li>
+                        10 foto edit
+                    </li>
+
+                    <li>
+                        30 menit
+                    </li>
+
+                </ul>
+
+
+                <a
+                    class="btn primary"
+                    href="#booking"
+                >
+                    Pilih
+                </a>
+
+            </div>
+
+
+
+            <!-- GRADUATION -->
+
+            <div class="package">
+
+                <h3>
+                    Graduation
+                </h3>
+
+
+                <div class="amount">
+                    Rp300K
+                </div>
+
+
+                <p>
+                    Untuk momen wisuda bersama.
+                </p>
+
+
+                <ul>
+
+                    <li>
+                        60 foto digital
+                    </li>
+
+                    <li>
+                        25 foto edit
+                    </li>
+
+                    <li>
+                        60 menit
+                    </li>
+
+                    <li>
+                        Reels pendek
+                    </li>
+
+                </ul>
+
+
+                <a
+                    class="btn primary"
+                    href="#booking"
+                >
+                    Pilih
+                </a>
+
+            </div>
+
+
+
+            <!-- PREMIUM -->
+
+            <div class="package">
+
+                <h3>
+                    Premium
+                </h3>
+
+
+                <div class="amount">
+                    Rp500K
+                </div>
+
+
+                <p>
+                    Foto + video cinematic.
+                </p>
+
+
+                <ul>
+
+                    <li>
+                        100 foto digital
+                    </li>
+
+                    <li>
+                        40 foto edit
+                    </li>
+
+                    <li>
+                        Durasi 2 jam
+                    </li>
+
+                </ul>
+
+
+                <a
+                    class="btn primary"
+                    href="#booking"
+                >
+                    Pilih
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================
+     PORTFOLIO SUPABASE
+========================================= -->
+
+<section
+    class="gallery"
+    id="galeri"
+>
+
+    <div class="container">
+
+
+        <div class="head">
+
+            <h2>
+                Portfolio
+            </h2>
+
+            <p>
+                Foto otomatis dari
+                Supabase Storage.
+            </p>
+
+        </div>
+
+
+        <div
+            class="gallery-grid"
+            id="galleryGrid"
+        >
+
+            <div class="empty">
+                Memuat portfolio...
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================
+     BOOKING
+========================================= -->
+
+<section
+    class="booking"
+    id="booking"
+>
+
+    <div class="container">
+
+
+        <div class="head">
+
+            <h2>
+                Booking Sekarang
+            </h2>
+
+            <p>
+                Data hanya dapat dilihat
+                admin yang login.
+            </p>
+
+        </div>
+
+
+        <div class="booking-box">
+
+
+            <!-- INFO -->
+
+            <div class="info">
+
+                <h3>
+                    Amankan tanggalmu 📅
+                </h3>
+
+
+                <p>
+                    Isi formulir dengan lengkap.
+                    Sistem membuat nomor booking
+                    otomatis.
+                </p>
+
+
+                <p>
+                    📱 081779211072
+                </p>
+
+            </div>
+
+
+
+            <!-- FORM -->
+
+            <form id="bookingForm">
+
+
+                <div class="field">
+
+                    <label>
+                        Nama *
+                    </label>
+
+                    <input
+                        id="name"
+                        required
+                    >
+
+                </div>
+
+
+
+                <div class="field">
+
+                    <label>
+                        WhatsApp *
+                    </label>
+
+                    <input
+                        id="phone"
+                        required
+                    >
+
+                </div>
+
+
+
+                <div class="field">
+
+                    <label>
+                        Tanggal *
+                    </label>
+
+                    <input
+                        id="date"
+                        type="date"
+                        required
+                    >
+
+                </div>
+
+
+
+                <div class="field">
+
+                    <label>
+                        Jam *
+                    </label>
+
+                    <input
+                        id="time"
+                        type="time"
+                        required
+                    >
+
+                </div>
+
+
+
+                <div class="field">
+
+                    <label>
+                        Layanan *
+                    </label>
+
+
+                    <select
+                        id="service"
+                        required
+                    >
+
+                        <option value="">
+                            Pilih
+                        </option>
+
+                        <option>
+                            Foto Wisuda
+                        </option>
+
+                        <option>
+                            Foto Kelulusan
+                        </option>
+
+                        <option>
+                            Video
+                        </option>
+
+                        <option>
+                            Foto Grup
+                        </option>
+
+                        <option>
+                            Foto + Video
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <div class="field">
+
+                    <label>
+                        Paket *
+                    </label>
+
+
+                    <select
+                        id="package"
+                        required
+                    >
+
+                        <option value="">
+                            Pilih
+                        </option>
+
+                        <option>
+                            Basic - Rp150K
+                        </option>
+
+                        <option>
+                            Graduation - Rp300K
+                        </option>
+
+                        <option>
+                            Premium - Rp500K
+                        </option>
+
+                        <option>
+                            Custom
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <div class="field full">
+
+                    <label>
+                        Lokasi *
+                    </label>
+
+                    <input
+                        id="location"
+                        required
+                    >
+
+                </div>
+
+
+
+                <div class="field full">
+
+                    <label>
+                        Catatan
+                    </label>
+
+                    <textarea
+                        id="notes"
+                    ></textarea>
+
+                </div>
+
+
+
+                <button
+                    class="btn primary full"
+                    type="submit"
+                >
+                    ✓ Buat Booking
+                </button>
+
+
+                <div
+                    id="message"
+                    class="msg"
+                ></div>
+
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================
+     FOOTER
+========================================= -->
+
+<footer>
+
+    <strong>
+        Gradding Studio
+    </strong>
+
+    —
+    Foto Wisuda •
+    Kelulusan •
+    Video
+
+    <br>
+
+    <small>
+        © 2026 Gradding Studio
+    </small>
+
+</footer>
+
+
+
+<!-- =========================================
+     SUPABASE
+========================================= -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="js.js"></script>
+
+
+</body>
+</html>
